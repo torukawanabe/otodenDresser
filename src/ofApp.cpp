@@ -23,7 +23,7 @@ void ofApp::setup(){
     closePlayer.setLoopState(ofLoopType::OF_LOOP_NONE);
     closePlayer.play();
 
-    makePlayers[0].load("movies/mode.mp4");
+    makePlayers[0].load("movies/mode.mov");
     makePlayers[1].load("movies/luxury.mp4");
     makePlayers[2].load("movies/organic.mp4");
     makePlayers[3].load("movies/girly.mp4");

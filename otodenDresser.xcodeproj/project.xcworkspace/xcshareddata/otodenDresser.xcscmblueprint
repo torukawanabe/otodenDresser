@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6B4746AFE4B23B6B7BD566A005B315D791E03388",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6B4746AFE4B23B6B7BD566A005B315D791E03388" : 9223372036854775807,
+    "6E85F585BA7940AD33F8E74F0EE05D55511194B6" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "64EF8FC3-EBDF-4706-AC1F-7616E73936D7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6B4746AFE4B23B6B7BD566A005B315D791E03388" : "otodenDresser\/",
+    "6E85F585BA7940AD33F8E74F0EE05D55511194B6" : "..\/..\/addons\/ofxTrueTypeFontUC"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "otodenDresser",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "otodenDresser.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/torukawanabe\/otodenDresser.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6B4746AFE4B23B6B7BD566A005B315D791E03388"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/hironishihara\/ofxTrueTypeFontUC.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6E85F585BA7940AD33F8E74F0EE05D55511194B6"
+    }
+  ]
+}

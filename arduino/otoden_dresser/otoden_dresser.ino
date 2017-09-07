@@ -81,7 +81,7 @@ void LightEmitting() {
   int c = getDayNight();
 
   for (uint16_t i = 0; i < strip.numPixels(); i++) {
-    strip.setPixelColor(i, strip.Color(c, c * 0.75, 0, 255 ) );
+    strip.setPixelColor(i, strip.Color(c, c * 0.3, 0, 255 - c) );
   }
   strip.show();
 }
@@ -134,13 +134,13 @@ void serialServo() {
   if (Serial.available() > 0) {
     int inByte = Serial.read();
     if (inByte == 0) {
-      angle = 1;
+      angle = 10;
     } else if (inByte == 1) {
       angle = 28;
     } else if (inByte == 2) {
-      angle = 45;
+      angle = 47;
     } else if (inByte == 3) {
-      angle = 65;
+      angle = 70;
     }
     sendRotation(angle);
   }
