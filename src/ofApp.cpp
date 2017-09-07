@@ -41,6 +41,14 @@ void ofApp::setup(){
     gui.add(isOn);
     gui.add(isOnNextShouldTrue);
     gui.add(arduinoSwitch);
+    
+    if(ofIsGLProgrammableRenderer()){
+        shader.load("shadersGL3/shader");
+    }else{
+        shader.load("shadersGL2/shader");
+    }
+    fbo.allocate(1080, 1920);
+    canvasFbo.allocate(1080, 1920);
 }
 
 //--------------------------------------------------------------
@@ -101,33 +109,108 @@ void ofApp::draw(){
     
     if(isOn){
         if(onStateMode == OnStart){
-            ofSetColor(255, 255, 255, movieAlpha);
-            openPlayer.draw(playerCurtainPos);
+            canvasFbo.begin();
+            ofClear(0);
+            canvasFbo.end();
+            
+            fbo.begin();
+            ofClear(0);
+            
+            shader.begin();
+            shader.setUniformTexture("tex0", canvasFbo.getTexture(), 1);
+            shader.setUniformTexture("tex1", *openPlayer.getTexturePtr(), 2);
+            shader.setUniform1f("alpha0", infoAlpha / 255.0);
+            shader.setUniform1f("alpha1", movieAlpha / 255.0);
+            
+            canvasFbo.draw(0, 0);
+            shader.end();
+            fbo.end();
         } else if (onStateMode == OnModePresentation){
-            ofSetColor(255, 255, 255, infoAlpha);
+            canvasFbo.begin();
+            ofClear(0);
+            ofSetColor(255, 255, 255, 255);
             timeFont.drawString(timeString, fontPos.x, fontPos.y);
             navImg.draw(navImgPos);
             modeFont.drawString(modeString, ofGetWidth()/2 - 100, ofGetHeight()/2);
-        } else if (onStateMode == OnAnimation){
-            ofSetColor(255, 255, 255, movieAlpha);
-            makePlayer->draw(playerMakePos);
+            canvasFbo.end();
             
-            ofSetColor(255, 255, 255, infoAlpha);
+            fbo.begin();
+            ofClear(0);
+            
+            shader.begin();
+            shader.setUniformTexture("tex0", canvasFbo.getTexture(), 1);
+            shader.setUniformTexture("tex1", *openPlayer.getTexturePtr(), 2);
+            shader.setUniform1f("alpha0", infoAlpha / 255.0);
+            shader.setUniform1f("alpha1", movieAlpha / 255.0);
+
+            
+            canvasFbo.draw(0, 0);
+            shader.end();
+            fbo.end();
+        } else if (onStateMode == OnAnimation){
+            canvasFbo.begin();
+            ofClear(0);
+            ofSetColor(255, 255, 255, 255);
             timeFont.drawString(timeString, fontPos.x, fontPos.y);
             navImg.draw(navImgPos);
+            canvasFbo.end();
+            
+            fbo.begin();
+            ofClear(0);
+            
+            shader.begin();
+            shader.setUniformTexture("tex0", canvasFbo.getTexture(), 1);
+            shader.setUniformTexture("tex1", *makePlayer->getTexturePtr(), 2);
+            shader.setUniform1f("alpha0", infoAlpha / 255.0);
+            shader.setUniform1f("alpha1", movieAlpha / 255.0);
+            
+            canvasFbo.draw(0, 0);
+            shader.end();
+            fbo.end();
         }
     }else{
         if(offStateMode == OffStart){
-            ofSetColor(255, 255, 255, movieAlpha);
-            makePlayer->draw(playerMakePos);
-            ofSetColor(255, 255, 255, infoAlpha);
+            canvasFbo.begin();
+            ofClear(0);
+            ofSetColor(255, 255, 255, 255);
             timeFont.drawString(timeString, fontPos.x, fontPos.y);
             navImg.draw(navImgPos);
+            canvasFbo.end();
+            
+            fbo.begin();
+            ofClear(0);
+            
+            shader.begin();
+            shader.setUniformTexture("tex0", canvasFbo.getTexture(), 1);
+            shader.setUniformTexture("tex1", *makePlayer->getTexturePtr(), 2);
+            shader.setUniform1f("alpha0", infoAlpha / 255.0);
+            shader.setUniform1f("alpha1", movieAlpha / 255.0);
+
+            canvasFbo.draw(0, 0);
+            shader.end();
+            fbo.end();
         }else if (offStateMode == OffEnd){
-            ofSetColor(255, 255, 255, movieAlpha);
-            closePlayer.draw(playerCurtainPos);
+            canvasFbo.begin();
+            ofClear(0);
+            canvasFbo.end();
+            
+            fbo.begin();
+            ofClear(0);
+            
+            shader.begin();
+            shader.setUniformTexture("tex0", canvasFbo.getTexture(), 1);
+            shader.setUniformTexture("tex1", *closePlayer.getTexturePtr(), 2);
+            shader.setUniform1f("alpha0", infoAlpha / 255.0);
+            shader.setUniform1f("alpha1", movieAlpha / 255.0);
+            
+            canvasFbo.draw(0, 0);
+            shader.end();
+            fbo.end();
         }
     }
+    
+    ofSetColor(255);
+    fbo.draw(0, 0);
     
     if(debugMode){
         ofSetColor(255);
@@ -297,6 +380,7 @@ void ofApp::initMakePlayer(int mode){
     makePlayer->setPosition(0);
     makePlayer->setLoopState(ofLoopType::OF_LOOP_NORMAL);
     makePlayer->play();
+    makePlayer->update();
 }
 
 void ofApp::sendRotation(int mode){

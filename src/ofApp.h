@@ -43,10 +43,13 @@ class ofApp : public ofBaseApp{
     
     void sendRotation(int mode);
     
+    ofShader shader;
+    ofFbo fbo, canvasFbo;
+    
     ofxPanel gui;
-    ofVideoPlayer openPlayer, closePlayer;
-    ofVideoPlayer* makePlayer;
-    ofVideoPlayer makePlayers[4];
+    ofAVFoundationPlayer openPlayer, closePlayer;
+    ofAVFoundationPlayer* makePlayer;
+    ofAVFoundationPlayer makePlayers[4];
     
     ofImage navImg;
     ofTrueTypeFont timeFont, modeFont;
