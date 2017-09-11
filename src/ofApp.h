@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "ofxHapPlayer.h"
 
 class ofApp : public ofBaseApp{
 
@@ -43,13 +44,10 @@ class ofApp : public ofBaseApp{
     
     void sendRotation(int mode);
     
-    ofShader shader;
-    ofFbo fbo, canvasFbo;
-    
     ofxPanel gui;
-    ofAVFoundationPlayer openPlayer, closePlayer;
-    ofAVFoundationPlayer* makePlayer;
-    ofAVFoundationPlayer makePlayers[4];
+    ofxHapPlayer openPlayer, closePlayer;
+    ofxHapPlayer* makePlayer;
+    ofxHapPlayer makePlayers[4];
     
     ofImage navImg;
     ofTrueTypeFont timeFont, modeFont;

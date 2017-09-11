@@ -1,3 +1,4 @@
 ofxGui
+ofxHapPlayer
 ofxOsc
 ofxTrueTypeFontUC

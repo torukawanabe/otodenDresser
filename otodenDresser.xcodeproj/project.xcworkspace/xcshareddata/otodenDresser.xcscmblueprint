@@ -5,11 +5,13 @@
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "6B4746AFE4B23B6B7BD566A005B315D791E03388" : 9223372036854775807,
+    "BFCEBA68FA34CC9D42430E49FB09A6EA416EC05F" : 9223372036854775807,
     "6E85F585BA7940AD33F8E74F0EE05D55511194B6" : 9223372036854775807
   },
-  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "64EF8FC3-EBDF-4706-AC1F-7616E73936D7",
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E158CD02-45A1-4421-9BA8-46FCC1C7D177",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "6B4746AFE4B23B6B7BD566A005B315D791E03388" : "otodenDresser\/",
+    "BFCEBA68FA34CC9D42430E49FB09A6EA416EC05F" : "..\/..\/addons\/ofxHapPlayer",
     "6E85F585BA7940AD33F8E74F0EE05D55511194B6" : "..\/..\/addons\/ofxTrueTypeFontUC"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "otodenDresser",
@@ -25,6 +27,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/hironishihara\/ofxTrueTypeFontUC.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6E85F585BA7940AD33F8E74F0EE05D55511194B6"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:bangnoise\/ofxHapPlayer.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BFCEBA68FA34CC9D42430E49FB09A6EA416EC05F"
     }
   ]
 }

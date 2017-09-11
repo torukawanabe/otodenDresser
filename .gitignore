@@ -8,3 +8,9 @@
 */*.xcodeproj/project.xcworkspace/xcshareddata/
 */*.xcodeproj/project.xcworkspace/xcuserdata/
 
+bin/data/movies/openhap.mov
+bin/data/movies/organichap.mov
+bin/data/movies/modehap.mov
+bin/data/movies/luxuryhap.mov
+bin/data/movies/girlyhap.mov
+bin/data/movies/closehap.mov

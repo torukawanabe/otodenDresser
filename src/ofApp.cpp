@@ -17,16 +17,16 @@ void ofApp::setup(){
         }
     }
     
-    openPlayer.load("movies/open.mp4");
+    openPlayer.load("movies/openhap.mov");
     openPlayer.setLoopState(ofLoopType::OF_LOOP_NONE);
-    closePlayer.load("movies/close.mp4");
+    closePlayer.load("movies/closehap.mov");
     closePlayer.setLoopState(ofLoopType::OF_LOOP_NONE);
     closePlayer.play();
-
-    makePlayers[0].load("movies/mode.mov");
-    makePlayers[1].load("movies/luxury.mp4");
-    makePlayers[2].load("movies/organic.mp4");
-    makePlayers[3].load("movies/girly.mp4");
+    
+    makePlayers[0].load("movies/modehap.mov");
+    makePlayers[1].load("movies/luxuryhap.mov");
+    makePlayers[2].load("movies/organichap.mov");
+    makePlayers[3].load("movies/girlyhap.mov");
     makePlayer = &makePlayers[0];
     
     navImg.load("images/nav_organic.png");
@@ -41,14 +41,6 @@ void ofApp::setup(){
     gui.add(isOn);
     gui.add(isOnNextShouldTrue);
     gui.add(arduinoSwitch);
-    
-    if(ofIsGLProgrammableRenderer()){
-        shader.load("shadersGL3/shader");
-    }else{
-        shader.load("shadersGL2/shader");
-    }
-    fbo.allocate(1080, 1920);
-    canvasFbo.allocate(1080, 1920);
 }
 
 //--------------------------------------------------------------
@@ -80,7 +72,7 @@ void ofApp::update(){
     }else{
         if(offStateMode == OffStart){
             makePlayer->update();
-
+            
             if(ofGetElapsedTimef() > modeStartTime + offStartTime){
                 initOffEnd();
             }
@@ -93,7 +85,7 @@ void ofApp::update(){
                         movieTargetAlpha = 0;
                     }
                 }
-
+                
                 
                 if(isOnNextShouldTrue){
                     startOn();
@@ -109,108 +101,33 @@ void ofApp::draw(){
     
     if(isOn){
         if(onStateMode == OnStart){
-            canvasFbo.begin();
-            ofClear(0);
-            canvasFbo.end();
-            
-            fbo.begin();
-            ofClear(0);
-            
-            shader.begin();
-            shader.setUniformTexture("tex0", canvasFbo.getTexture(), 1);
-            shader.setUniformTexture("tex1", *openPlayer.getTexturePtr(), 2);
-            shader.setUniform1f("alpha0", infoAlpha / 255.0);
-            shader.setUniform1f("alpha1", movieAlpha / 255.0);
-            
-            canvasFbo.draw(0, 0);
-            shader.end();
-            fbo.end();
+            ofSetColor(255, 255, 255, movieAlpha);
+            openPlayer.draw(playerCurtainPos.x, playerCurtainPos.y);
         } else if (onStateMode == OnModePresentation){
-            canvasFbo.begin();
-            ofClear(0);
-            ofSetColor(255, 255, 255, 255);
+            ofSetColor(255, 255, 255, infoAlpha);
             timeFont.drawString(timeString, fontPos.x, fontPos.y);
             navImg.draw(navImgPos);
             modeFont.drawString(modeString, ofGetWidth()/2 - 100, ofGetHeight()/2);
-            canvasFbo.end();
-            
-            fbo.begin();
-            ofClear(0);
-            
-            shader.begin();
-            shader.setUniformTexture("tex0", canvasFbo.getTexture(), 1);
-            shader.setUniformTexture("tex1", *openPlayer.getTexturePtr(), 2);
-            shader.setUniform1f("alpha0", infoAlpha / 255.0);
-            shader.setUniform1f("alpha1", movieAlpha / 255.0);
-
-            
-            canvasFbo.draw(0, 0);
-            shader.end();
-            fbo.end();
         } else if (onStateMode == OnAnimation){
-            canvasFbo.begin();
-            ofClear(0);
-            ofSetColor(255, 255, 255, 255);
+            ofSetColor(255, 255, 255, movieAlpha);
+            makePlayer->draw(playerMakePos.x, playerMakePos.y);
+            
+            ofSetColor(255, 255, 255, infoAlpha);
             timeFont.drawString(timeString, fontPos.x, fontPos.y);
             navImg.draw(navImgPos);
-            canvasFbo.end();
-            
-            fbo.begin();
-            ofClear(0);
-            
-            shader.begin();
-            shader.setUniformTexture("tex0", canvasFbo.getTexture(), 1);
-            shader.setUniformTexture("tex1", *makePlayer->getTexturePtr(), 2);
-            shader.setUniform1f("alpha0", infoAlpha / 255.0);
-            shader.setUniform1f("alpha1", movieAlpha / 255.0);
-            
-            canvasFbo.draw(0, 0);
-            shader.end();
-            fbo.end();
         }
     }else{
         if(offStateMode == OffStart){
-            canvasFbo.begin();
-            ofClear(0);
-            ofSetColor(255, 255, 255, 255);
+            ofSetColor(255, 255, 255, movieAlpha);
+            makePlayer->draw(playerMakePos.x, playerMakePos.y);
+            ofSetColor(255, 255, 255, infoAlpha);
             timeFont.drawString(timeString, fontPos.x, fontPos.y);
             navImg.draw(navImgPos);
-            canvasFbo.end();
-            
-            fbo.begin();
-            ofClear(0);
-            
-            shader.begin();
-            shader.setUniformTexture("tex0", canvasFbo.getTexture(), 1);
-            shader.setUniformTexture("tex1", *makePlayer->getTexturePtr(), 2);
-            shader.setUniform1f("alpha0", infoAlpha / 255.0);
-            shader.setUniform1f("alpha1", movieAlpha / 255.0);
-
-            canvasFbo.draw(0, 0);
-            shader.end();
-            fbo.end();
         }else if (offStateMode == OffEnd){
-            canvasFbo.begin();
-            ofClear(0);
-            canvasFbo.end();
-            
-            fbo.begin();
-            ofClear(0);
-            
-            shader.begin();
-            shader.setUniformTexture("tex0", canvasFbo.getTexture(), 1);
-            shader.setUniformTexture("tex1", *closePlayer.getTexturePtr(), 2);
-            shader.setUniform1f("alpha0", infoAlpha / 255.0);
-            shader.setUniform1f("alpha1", movieAlpha / 255.0);
-            
-            canvasFbo.draw(0, 0);
-            shader.end();
-            fbo.end();
+            ofSetColor(255, 255, 255, movieAlpha);
+            closePlayer.draw(playerCurtainPos.x, playerCurtainPos.y);
         }
     }
-    
-    ofSetColor(255);
-    fbo.draw(0, 0);
     
     if(debugMode){
         ofSetColor(255);
@@ -355,7 +272,7 @@ void ofApp::initLuxuryType(){
     modeString = "luxury";
     navImg.load("images/nav_luxury.png");
     initMakePlayer(1);
-
+    
     sendRotation(1);
 }
 
@@ -363,7 +280,7 @@ void ofApp::initOrganicType(){
     modeString = "organic";
     navImg.load("images/nav_organic.png");
     initMakePlayer(2);
-
+    
     sendRotation(2);
 }
 
@@ -371,7 +288,7 @@ void ofApp::initGirlyType(){
     modeString = "girly";
     navImg.load("images/nav_girly.png");
     initMakePlayer(3);
-
+    
     sendRotation(3);
 }
 
@@ -380,7 +297,6 @@ void ofApp::initMakePlayer(int mode){
     makePlayer->setPosition(0);
     makePlayer->setLoopState(ofLoopType::OF_LOOP_NORMAL);
     makePlayer->play();
-    makePlayer->update();
 }
 
 void ofApp::sendRotation(int mode){
@@ -391,45 +307,45 @@ void ofApp::sendRotation(int mode){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseEntered(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseExited(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+    
 }
