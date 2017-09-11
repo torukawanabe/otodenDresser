@@ -8,7 +8,7 @@
   * ofxGui
   * ofxOsc
   * ofxTrueTyepFontUC
-  * ofxHapPlayer (libavformatブランチを選択すること)
+  * ofxHapPlayer (libavformatブランチを選択すること)
 
 ## Arduino
 * arduino 1.8.3
